@@ -15,15 +15,15 @@ var board = [
 */
 
 var board = [
-    [0, 0, 8, 9, 1, 0, 0, 0, 5],
-    [0, 0, 0, 0, 0, 0, 2, 0, 0],
-    [0, 0, 5, 0, 0, 0, 4, 9, 0],
-    [0, 0, 0, 5, 0, 0, 0, 1, 0],
-    [0, 3, 0, 0, 0, 0, 0, 6, 0],
-    [6, 0, 0, 7, 0, 8, 9, 0, 0],
-    [0, 9, 0, 0, 0, 0, 6, 0, 3],
-    [0, 0, 0, 0, 0, 6, 0, 0, 0],
-    [0, 4, 0, 0, 8, 2, 0, 0, 0]
+    [9, 1, 0, 0, 4, 0, 5, 0, 0],
+    [0, 0, 6, 0, 0, 0, 0, 0, 7],
+    [0, 0, 2, 0, 0, 3, 6, 0, 9],
+    [0, 0, 0, 0, 7, 1, 0, 0, 0],
+    [0, 7, 0, 0, 0, 0, 0, 2, 0],
+    [0, 0, 0, 5, 9, 0, 0, 0, 0],
+    [7, 0, 4, 8, 0, 0, 3, 0, 0],
+    [6, 0, 0, 0, 0, 0, 9, 0, 0],
+    [0, 0, 3, 0, 5, 0, 0, 8, 4]
 ]
 
 func printBoard(_ board: [[Int]]) {
@@ -34,13 +34,14 @@ func printBoard(_ board: [[Int]]) {
         }
         
         for (colIndex, col) in row.enumerated() {
+            let char = col == 0 ? " " : String(col)
             if colIndex % 3 == 0 {
                 print("|", terminator:"")
             }
             if colIndex == 8 {
-                print(" \(col) |")
+                print(" \(char) |")
             } else {
-                print(" \(col) ", terminator:"")
+                print(" \(char) ", terminator:"")
             }
         }
     }
@@ -105,6 +106,9 @@ func isValid(board: [[Int]], number: Int, position: (row: Int, col: Int)) -> Boo
 
 printBoard(board)
 print("solving...")
+let start = Date()
 solve(&board)
-print("solved!")
+let timeSpent = Date().timeIntervalSince(start)
+let timeFormatter = DateComponentsFormatter()
+print("solved! Time spent: \(timeFormatter.string(from: timeSpent) ?? "") seconds")
 printBoard(board)
